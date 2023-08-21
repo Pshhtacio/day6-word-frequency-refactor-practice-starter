@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
 
@@ -47,12 +48,9 @@ public class WordFrequencyGame {
     }
 
     private static String generatePrintLines(List<WordFrequencyInfo> wordFrequencyInfoList) {
-        StringJoiner joiner = new StringJoiner(NEWLINE_DELIMITER);
-        for (WordFrequencyInfo word : wordFrequencyInfoList) {
-            String s = word.getWord() + SPACE_CHAR + word.getWordCount();
-            joiner.add(s);
-        }
-        return joiner.toString();
+        return wordFrequencyInfoList.stream()
+                .map(word -> word.getWord() + SPACE_CHAR + word.getWordCount())
+                .collect(Collectors.joining(NEWLINE_DELIMITER));
     }
 
 
