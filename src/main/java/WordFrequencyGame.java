@@ -14,23 +14,24 @@ public class WordFrequencyGame {
         } else {
             try {
                 String[] words = inputStr.split(SPACE_DELIMITER);
-
                 Map<String, Long> wordFrequencyMap = Arrays.stream(words)
                         .collect(Collectors.groupingBy(
                                 word -> word,
                                 Collectors.counting()
                         ));
-
-                return wordFrequencyMap.entrySet().stream()
-                        .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().intValue()))
-                        .sorted(Comparator.comparingInt(WordFrequencyInfo::getWordCount).reversed())
-                        .map(word -> word.getWord() + SPACE_CHAR + word.getWordCount())
-                        .collect(Collectors.joining(NEWLINE_DELIMITER));
-
+                return generateWordFrequencyDetails(wordFrequencyMap);
             } catch (Exception e) {
                 return CALCULATE_ERROR;
             }
         }
+    }
+
+    private static String generateWordFrequencyDetails(Map<String, Long> wordFrequencyMap) {
+        return wordFrequencyMap.entrySet().stream()
+                .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().intValue()))
+                .sorted(Comparator.comparingInt(WordFrequencyInfo::getWordCount).reversed())
+                .map(word -> word.getWord() + SPACE_CHAR + word.getWordCount())
+                .collect(Collectors.joining(NEWLINE_DELIMITER));
     }
 
     private Map<String, List<WordFrequencyInfo>> getListMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
