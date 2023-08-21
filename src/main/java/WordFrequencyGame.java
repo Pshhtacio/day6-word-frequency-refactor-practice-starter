@@ -10,7 +10,7 @@ public class WordFrequencyGame {
 
     public String getResult(String inputStr) {
         if (inputStr.split(SPACE_DELIMITER).length == 1) {
-            return inputStr + " 1";
+            return inputStr + SPACE_CHAR + "1";
         } else {
             try {
                 String[] words = inputStr.split(SPACE_DELIMITER);
@@ -41,7 +41,6 @@ public class WordFrequencyGame {
         for (WordFrequencyInfo wordFrequencyInfo : wordFrequencyInfoList) {
             map.computeIfAbsent(wordFrequencyInfo.getWord(), k -> new ArrayList<>()).add(wordFrequencyInfo);
         }
-
         return map;
     }
 
