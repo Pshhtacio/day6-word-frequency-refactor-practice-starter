@@ -14,27 +14,21 @@ public class WordFrequencyGame {
         } else {
             try {
                 String[] words = inputStr.split(SPACE_DELIMITER);
-
                 List<WordFrequencyInfo> wordFrequencyInfoList = new ArrayList<>();
                 for (String s : words) {
                     WordFrequencyInfo wordFrequencyInfo = new WordFrequencyInfo(s, 1);
                     wordFrequencyInfoList.add(wordFrequencyInfo);
                 }
                 Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(wordFrequencyInfoList);
-
                 List<WordFrequencyInfo> frequencyInfos = new ArrayList<>();
                 for (Map.Entry<String, List<WordFrequencyInfo>> entry : wordFrequencyMap.entrySet()) {
                     WordFrequencyInfo wordFrequencyInfo = new WordFrequencyInfo(entry.getKey(), entry.getValue().size());
                     frequencyInfos.add(wordFrequencyInfo);
                 }
                 wordFrequencyInfoList = frequencyInfos;
-
                 wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
-
                 return generatePrintLines(wordFrequencyInfoList);
             } catch (Exception e) {
-
-
                 return CALCULATE_ERROR;
             }
         }
@@ -45,7 +39,6 @@ public class WordFrequencyGame {
                 .map(word -> word.getWord() + SPACE_CHAR + word.getWordCount())
                 .collect(Collectors.joining(NEWLINE_DELIMITER));
     }
-
 
     private Map<String, List<WordFrequencyInfo>> getListMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
         Map<String, List<WordFrequencyInfo>> map = new HashMap<>();
