@@ -18,10 +18,9 @@ public class WordFrequencyGame {
                         .map(word -> new WordFrequencyInfo(word, 1))
                         .collect(Collectors.toList());
                 Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(wordFrequencyInfoList);
-                List<WordFrequencyInfo> frequencyInfos = wordFrequencyMap.entrySet().stream()
+                wordFrequencyInfoList = wordFrequencyMap.entrySet().stream()
                         .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().size()))
                         .collect(Collectors.toList());
-                wordFrequencyInfoList = frequencyInfos;
                 wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
                 return generatePrintLines(wordFrequencyInfoList);
             } catch (Exception e) {
