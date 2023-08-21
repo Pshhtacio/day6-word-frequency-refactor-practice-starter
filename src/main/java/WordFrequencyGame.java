@@ -3,10 +3,10 @@ import java.util.stream.Collectors;
 
 public class WordFrequencyGame {
 
-    public static final String SPACE_DELIMITER = "\\s+";
-    public static final String NEWLINE_DELIMITER = "\n";
-    public static final String SPACE_CHAR = " ";
-    public static final String CALCULATE_ERROR = "Calculate Error";
+    private static final String SPACE_DELIMITER = "\\s+";
+    private static final String NEWLINE_DELIMITER = "\n";
+    private static final String SPACE_CHAR = " ";
+    private static final String CALCULATE_ERROR = "Calculate Error";
 
     public String getResult(String inputStr) {
         if (inputStr.split(SPACE_DELIMITER).length == 1) {
