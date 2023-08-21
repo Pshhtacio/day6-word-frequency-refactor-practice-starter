@@ -14,11 +14,9 @@ public class WordFrequencyGame {
         } else {
             try {
                 String[] words = inputStr.split(SPACE_DELIMITER);
-                List<WordFrequencyInfo> wordFrequencyInfoList = new ArrayList<>();
-                for (String s : words) {
-                    WordFrequencyInfo wordFrequencyInfo = new WordFrequencyInfo(s, 1);
-                    wordFrequencyInfoList.add(wordFrequencyInfo);
-                }
+                List<WordFrequencyInfo> wordFrequencyInfoList = Arrays.stream(words)
+                        .map(word -> new WordFrequencyInfo(word, 1))
+                        .collect(Collectors.toList());
                 Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(wordFrequencyInfoList);
                 List<WordFrequencyInfo> frequencyInfos = new ArrayList<>();
                 for (Map.Entry<String, List<WordFrequencyInfo>> entry : wordFrequencyMap.entrySet()) {
