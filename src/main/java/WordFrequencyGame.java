@@ -33,10 +33,4 @@ public class WordFrequencyGame {
                 .map(word -> word.getWord() + SPACE_CHAR + word.getWordCount())
                 .collect(Collectors.joining(NEWLINE_DELIMITER));
     }
-
-    private Map<String, List<WordFrequencyInfo>> getListMap(List<WordFrequencyInfo> wordFrequencyInfoList) {
-        return wordFrequencyInfoList.stream().collect(Collectors.groupingBy(WordFrequencyInfo::getWord));
-    }
-
-
 }
