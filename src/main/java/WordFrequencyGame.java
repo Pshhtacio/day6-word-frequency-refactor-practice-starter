@@ -21,8 +21,10 @@ public class WordFrequencyGame {
                 wordFrequencyInfoList = wordFrequencyMap.entrySet().stream()
                         .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().size()))
                         .collect(Collectors.toList());
-                wordFrequencyInfoList.sort((firstWord, secondWord) -> secondWord.getWordCount() - firstWord.getWordCount());
-                return generatePrintLines(wordFrequencyInfoList);
+                return wordFrequencyInfoList.stream()
+                        .sorted(Comparator.comparingInt(WordFrequencyInfo::getWordCount).reversed())
+                        .map(word -> word.getWord() + SPACE_CHAR + word.getWordCount())
+                        .collect(Collectors.joining(NEWLINE_DELIMITER));
             } catch (Exception e) {
                 return CALCULATE_ERROR;
             }
