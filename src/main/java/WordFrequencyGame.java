@@ -15,16 +15,14 @@ public class WordFrequencyGame {
             try {
                 String[] words = inputStr.split(SPACE_DELIMITER);
 
-                List<WordFrequencyInfo> wordFrequencyInfoList = Arrays.stream(words)
-                        .map(word -> new WordFrequencyInfo(word, 1))
-                        .collect(Collectors.toList());
+                Map<String, Long> wordFrequencyMap = Arrays.stream(words)
+                        .collect(Collectors.groupingBy(
+                                word -> word,
+                                Collectors.counting()
+                        ));
 
-                Map<String, List<WordFrequencyInfo>> wordFrequencyMap = getListMap(wordFrequencyInfoList);
-                wordFrequencyInfoList = wordFrequencyMap.entrySet().stream()
-                        .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().size()))
-                        .collect(Collectors.toList());
-
-                return wordFrequencyInfoList.stream()
+                return wordFrequencyMap.entrySet().stream()
+                        .map(entry -> new WordFrequencyInfo(entry.getKey(), entry.getValue().intValue()))
                         .sorted(Comparator.comparingInt(WordFrequencyInfo::getWordCount).reversed())
                         .map(word -> word.getWord() + SPACE_CHAR + word.getWordCount())
                         .collect(Collectors.joining(NEWLINE_DELIMITER));
